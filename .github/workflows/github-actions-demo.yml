@@ -1,0 +1,35 @@
+name: Print and Check Repo Details
+
+on: 
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  print-details:
+    runs-on: ubuntu-latest
+    
+    steps:
+      # Print GitHub event details
+      - name: Print event information
+        run: |
+          echo "GitHub Event Name: ${{ github.event_name }}"
+          echo "Runner Name: ${{ runner.name }}"
+          echo "Repository: ${{ github.repository }}"
+          echo "Branch: ${{ github.ref_name }}"
+
+      # Check out the repository code
+      - name: Check out code
+        uses: actions/checkout@v3
+
+      # List all files in the repository
+      - name: List files in repository
+        run: ls -al
+
+      # Display job status after completion
+      - name: Display job status
+        if: always()  # Ensures this step runs even if previous steps fail
+        run: echo "Job Status: ${{ job.status }}"
