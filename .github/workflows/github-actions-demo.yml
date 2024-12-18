@@ -22,7 +22,7 @@ jobs:
           echo "Branch: ${{ github.ref_name }}"
 
       # Check out the repository code
-      - name: Check out code
+      - name: Checkout code
         uses: actions/checkout@v3
 
       # List all files in the repository
